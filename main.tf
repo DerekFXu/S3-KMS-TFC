@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "dfxbucket22" {
   bucket = "dfxbucket22"
 }
 
-resource "aws_s3_bucket_ownership_controls" "example" {
+resource "aws_s3_bucket_ownership_controls" "bucket_controls" {
   bucket = aws_s3_bucket.dfxbucket22.id
 
   rule {
