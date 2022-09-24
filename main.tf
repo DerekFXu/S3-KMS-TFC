@@ -1,6 +1,5 @@
 provider "aws" {
   region = var.region
-  access_key = var.AWS_ACCESS_KEY
 }
 
 data "aws_ami" "ubuntu" {
