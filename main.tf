@@ -59,8 +59,6 @@ resource "aws_iam_user_policy" "s3_policy" {
   name = "s3_policy"
   user = aws_iam_user.s3_user.name
 
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -68,7 +66,13 @@ resource "aws_iam_user_policy" "s3_policy" {
         Action = "s3:ListBucket",
         Effect = "Allow",
         Resource = "arn:aws:s3:::dfxbucket22"
+      },
+      {
+        Action = "s3:GetOjbect",
+        Effect = "Allow",
+        Resource = "arn:aws:s3:::dfxbucket22/HW.txt"
       }
     ]
   })
 }
+###
