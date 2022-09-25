@@ -4,8 +4,4 @@ provider "aws" {
 
 resource "aws_s3_bucket" "dfxbucket22" {
   bucket = "dfxbucket22"
-    
-  rules {
-    object_ownership = "BucketOwnerEnforced"
-  }
 }
