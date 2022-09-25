@@ -5,3 +5,18 @@ provider "aws" {
 resource "aws_s3_bucket" "dfxbucket22" {
   bucket = "dfxbucket22"
 }
+
+resource "aws_s3_bucket_acl" "dfxbucket22-acl" {
+  bucket = aws_s3_bucket.dfxbucket22.id
+  acl = "private"
+}
+
+resource "aws_s3_bucket_ownership_controls" "dfxbucket22-ownership" {
+  bucket = aws_s3_bucket.dfxbucket22.id
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+  depends_on = [
+    aws_s3_bucket_acl.dfxbucket22-acl
+]
+}
