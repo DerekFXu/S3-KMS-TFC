@@ -63,9 +63,9 @@ resource "aws_iam_user_policy" "s3_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action = "s3:ListBucket",
+        Action = ["s3:ListBucket", "kms:GenerateDataKey"]
         Effect = "Allow",
-        Resource = "arn:aws:s3:::dfxbucket22"
+        Resource = ["arn:aws:s3:::dfxbucket22", "arn:aws:kms:us-east-2:519677535986:key/7987df2c-d500-4ffa-b380-d61c615069ad"]
       },
       {
         Action = "s3:GetObject",
