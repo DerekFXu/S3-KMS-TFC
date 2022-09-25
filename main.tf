@@ -71,7 +71,8 @@ resource "aws_iam_user_policy" "s3_policy" {
         Action = ["s3:GetObject", "kms:Decrypt"],
         Effect = "Allow",
         Resource = ["arn:aws:s3:::dfxbucket22/HW.txt", "arn:aws:kms:us-east-2:519677535986:key/7987df2c-d500-4ffa-b380-d61c615069ad"]
-        #Since it was stated the condition was download from IP I only set up this condition for the GetObject permission. 
+        #Since it was stated that only the download should be restricted by IP, I only added this condition for download. Listing bucket objects can be done from any IP with this user.
+        #However this user can still only download the HW.txt. Other objects such as Note1/2/3 are out of the access rights for this user no matter what(they exist in the bucket for you to test that).   
         Condition = {
           "IpAddress": {
             "aws:SourceIp" : "40.143.42.12"
