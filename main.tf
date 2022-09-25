@@ -68,7 +68,7 @@ resource "aws_iam_user_policy" "s3_policy" {
         Resource = "arn:aws:s3:::dfxbucket22"
       },
       {
-        Action = "s3:GetOjbect",
+        Action = "s3:GetObject",
         Effect = "Allow",
         Resource = "arn:aws:s3:::dfxbucket22/HW.txt"
       }
