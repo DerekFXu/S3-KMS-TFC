@@ -1,11 +1,12 @@
 provider "aws" {
   region = var.region
 }
-
+#Creating KMS key resource
 resource "aws_kms_key" "mykey" {
   deletion_window_in_days = 10
 }
 
+###Bucket creation
 resource "aws_s3_bucket" "dfxbucket22" {
   bucket = "dfxbucket22"
 }
@@ -42,4 +43,32 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "kms-s3-encryption
     }
     bucket_key_enabled = true
   }
+}
+###
+
+###User creation
+resource "aws_iam_user" "s3_user" {
+  name = "s3_user"
+}
+
+resource "aws_iam_access_key" "s3_user_key" {
+  user    = aws_iam_user.s3_user.name
+}
+
+resource "aws_iam_user_policy" "s3_policy" {
+  name = "s3_policy"
+  user = aws_iam_user.s3_user.name
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "s3:ListBucket",
+        Effect = "Allow",
+        Resource = "arn:aws:s3:::dfxbucket22"
+      }
+    ]
+  })
 }
