@@ -71,6 +71,7 @@ resource "aws_iam_user_policy" "s3_policy" {
         Action = ["s3:GetObject", "kms:Decrypt"],
         Effect = "Allow",
         Resource = ["arn:aws:s3:::dfxbucket22/HW.txt", "arn:aws:kms:us-east-2:519677535986:key/7987df2c-d500-4ffa-b380-d61c615069ad"]
+        #Since it was stated the condition was download from IP I only set up this condition for the GetObject permission. 
         Condition = {
           "IpAddress": {
             "aws:SourceIp" : "40.143.42.12"
